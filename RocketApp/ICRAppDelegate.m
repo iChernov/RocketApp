@@ -7,12 +7,16 @@
 //
 
 #import "ICRAppDelegate.h"
+#import "ICRProductsTableViewController.h"
 
 @implementation ICRAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [MagicalRecord setupAutoMigratingCoreDataStack];
+    ICRProductsTableViewController *viewController = [[ICRProductsTableViewController alloc] initWithNibName:nil bundle:nil];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    self.window.rootViewController = navController;
     return YES;
 }
 							

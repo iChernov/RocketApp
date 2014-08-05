@@ -13,7 +13,6 @@
 		7611F5A9198BB8FF0062522B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7611F5A7198BB8FF0062522B /* InfoPlist.strings */; };
 		7611F5AB198BB8FF0062522B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7611F5AA198BB8FF0062522B /* main.m */; };
 		7611F5AF198BB8FF0062522B /* ICRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7611F5AE198BB8FF0062522B /* ICRAppDelegate.m */; };
-		7611F5B2198BB8FF0062522B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7611F5B0198BB8FF0062522B /* Main.storyboard */; };
 		7611F5B7198BB8FF0062522B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7611F5B6198BB8FF0062522B /* Images.xcassets */; };
 		7611F5BE198BB8FF0062522B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7611F5BD198BB8FF0062522B /* XCTest.framework */; };
 		7611F5BF198BB8FF0062522B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7611F59E198BB8FF0062522B /* Foundation.framework */; };
@@ -49,7 +48,6 @@
 		7611F5AC198BB8FF0062522B /* RocketApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RocketApp-Prefix.pch"; sourceTree = "<group>"; };
 		7611F5AD198BB8FF0062522B /* ICRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ICRAppDelegate.h; sourceTree = "<group>"; };
 		7611F5AE198BB8FF0062522B /* ICRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ICRAppDelegate.m; sourceTree = "<group>"; };
-		7611F5B1198BB8FF0062522B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7611F5B6198BB8FF0062522B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7611F5BC198BB8FF0062522B /* RocketAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RocketAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7611F5BD198BB8FF0062522B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -126,12 +124,12 @@
 		7611F5A4198BB8FF0062522B /* RocketApp */ = {
 			isa = PBXGroup;
 			children = (
+				76B9CD6F199119FF005B2A11 /* iPad */,
 				76B9CD5F199101FE005B2A11 /* CoreData */,
 				7611F5AD198BB8FF0062522B /* ICRAppDelegate.h */,
 				7611F5AE198BB8FF0062522B /* ICRAppDelegate.m */,
 				76B9CD6619910296005B2A11 /* ICRProductTableViewCell.h */,
 				76B9CD6719910296005B2A11 /* ICRProductTableViewCell.m */,
-				7611F5B0198BB8FF0062522B /* Main.storyboard */,
 				76B9CD691991033E005B2A11 /* ICRProductsTableViewController.h */,
 				76B9CD6A1991033E005B2A11 /* ICRProductsTableViewController.m */,
 				7611F5B6198BB8FF0062522B /* Images.xcassets */,
@@ -177,6 +175,13 @@
 				76B9CD601991021A005B2A11 /* RModel.xcdatamodeld */,
 			);
 			name = CoreData;
+			sourceTree = "<group>";
+		};
+		76B9CD6F199119FF005B2A11 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = iPad;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,7 +265,6 @@
 			files = (
 				7611F5B7198BB8FF0062522B /* Images.xcassets in Resources */,
 				7611F5A9198BB8FF0062522B /* InfoPlist.strings in Resources */,
-				7611F5B2198BB8FF0062522B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,14 +350,6 @@
 				7611F5A8198BB8FF0062522B /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		7611F5B0198BB8FF0062522B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7611F5B1198BB8FF0062522B /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		7611F5C6198BB8FF0062522B /* InfoPlist.strings */ = {
@@ -446,7 +442,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RocketApp/RocketApp-Prefix.pch";
 				INFOPLIST_FILE = "RocketApp/RocketApp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -460,7 +458,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RocketApp/RocketApp-Prefix.pch";
 				INFOPLIST_FILE = "RocketApp/RocketApp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

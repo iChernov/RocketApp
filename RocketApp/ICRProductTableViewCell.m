@@ -20,16 +20,19 @@ NSString *const kProductCellIdentifier = @"RProductTableCellIdentifier";
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        _productNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 10, 250, 25)];
+        CGRect screenRect = [[UIScreen mainScreen] bounds];
+        CGFloat screenWidth = screenRect.size.width;
+        
+        _productNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 10, screenWidth - 100, 25)];
         _productNameLabel.font = [UIFont systemFontOfSize:19.0];
         [self.contentView addSubview:_productNameLabel];
         
-        _productPriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(275, 40, 75, 25)];
+        _productPriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(screenWidth - 85, 40, 75, 25)];
         _productPriceLabel.font = [UIFont systemFontOfSize:15.0];
         _productPriceLabel.textColor = [UIColor greenColor];
         [self.contentView addSubview:_productPriceLabel];
         
-        _brandNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 45, 250, 20)];
+        _brandNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 45, screenWidth - 100, 20)];
         _brandNameLabel.font = [UIFont systemFontOfSize:13.0];
         [self.contentView addSubview:_brandNameLabel];
         _productImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 45, 60)];

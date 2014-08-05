@@ -16,7 +16,7 @@ static int productsPerPage = 24;
 static const int kCellHeightValue = 70.0;
 
 @interface ICRProductsTableViewController ()
-@property (weak, nonatomic) IBOutlet UISegmentedControl *sortControl;
+@property (strong, nonatomic) UISegmentedControl *sortControl;
 @property NSMutableArray *productsArray;
 - (IBAction)setSortingOption:(id)sender;
 @end
@@ -131,6 +131,12 @@ static const int kCellHeightValue = 70.0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    _sortControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Popularity", @"Name", @"Price", @"Brand", nil]];
+    [_sortControl setSelectedSegmentIndex:0];
+    self.navigationItem.titleView = _sortControl;
+    
+    
     [self.tableView registerClass:[ICRProductTableViewCell class] forCellReuseIdentifier:kProductCellIdentifier];
     _productsArray = [[RocketEntity MR_findAll] mutableCopy];
     if (_productsArray.count == 0) {
