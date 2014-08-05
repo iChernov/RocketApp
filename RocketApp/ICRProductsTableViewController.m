@@ -12,7 +12,7 @@
 #import "ICRProductTableViewCell.h"
 
 static NSString * const BaseURLString = @"https://www.zalora.com.my/mobile-api/women/clothing";
-static int productsPerPage = 15;
+static int productsPerPage = 24;
 static const int kCellHeightValue = 70.0;
 
 @interface ICRProductsTableViewController ()
@@ -24,19 +24,53 @@ static const int kCellHeightValue = 70.0;
 @implementation ICRProductsTableViewController
 
 - (IBAction)setSortingOption:(id)sender {
-    
+    [self refreshData];
 }
 
 - (void) refreshData {
     [_productsArray removeAllObjects];
-    NSArray *allRecords = [RocketEntity MR_findAll];
-    [_productsArray addObjectsFromArray:allRecords];
+    NSString *propertyToSortName;
+    BOOL isAscending;
+    switch (_sortControl.selectedSegmentIndex) {
+        case 1:
+            propertyToSortName = @"name";
+            isAscending = YES;
+            break;
+        case 2:
+            propertyToSortName = @"price";
+            isAscending = YES;
+            break;
+        case 3:
+            propertyToSortName = @"brand";
+            isAscending = YES;
+            break;
+        case 0:
+            propertyToSortName = @"popularity";
+            isAscending = NO;
+            break;
+            
+        default:
+            propertyToSortName = @"popularity";
+            isAscending = NO;
+            break;
+    }
+    NSArray *allRecords;
+    if ([propertyToSortName isEqualToString: @"popularity"]) {
+        allRecords = [RocketEntity MR_findAll];
+    } else {
+        allRecords = [RocketEntity MR_findAllSortedBy:propertyToSortName ascending:isAscending];
+    }
+    for (id product in allRecords) {
+        if (![_productsArray containsObject:product]) {
+            [_productsArray addObject:product];
+        }
+    }
     [self.tableView reloadData];
 }
 
 - (void)loadProductsStartingFromRow:(int)row {
     __weak __typeof(&*self)weakSelf = self;
-    int pageToLoad = row/productsPerPage;
+    int pageToLoad = (row + 1)/productsPerPage;
     
     NSString *string = [NSString stringWithFormat:@"%@?maxitems=%d&page=%d", BaseURLString, productsPerPage, pageToLoad];
     NSURL *url = [NSURL URLWithString:string];
@@ -48,10 +82,14 @@ static const int kCellHeightValue = 70.0;
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSArray *productsToAdd = responseObject[@"metadata"][@"results"];
         [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+            NSMutableArray *tempIDsArray = [NSMutableArray new];
+            NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+            [f setNumberStyle:NSNumberFormatterDecimalStyle];
             for(NSDictionary *productDictionary in productsToAdd) {
-                RocketEntity *product = [RocketEntity MR_findFirstByAttribute:@"id" withValue:productDictionary[@"id"]];
+                RocketEntity *product = [RocketEntity MR_findFirstByAttribute:@"id" withValue:[f numberFromString:productDictionary[@"id"]]];
                 NSString *receivedImagePath = productDictionary[@"images"][1][@"path"];
-                if (!product) {
+                if ((!product)&&(![tempIDsArray containsObject:productDictionary[@"id"]])) {
+                    [tempIDsArray addObject:productDictionary[@"id"]];
                     product = [RocketEntity MR_createInContext:localContext];
                     product.image_url = receivedImagePath;
                 } else {
@@ -60,8 +98,6 @@ static const int kCellHeightValue = 70.0;
                         product.image_url = receivedImagePath;
                     }
                 }
-                NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
-                [f setNumberStyle:NSNumberFormatterDecimalStyle];
                 product.id = [f numberFromString:productDictionary[@"id"]];
                 product.name = productDictionary[@"data"][@"name"];
                 product.brand = productDictionary[@"data"][@"brand"];
@@ -130,7 +166,7 @@ static const int kCellHeightValue = 70.0;
 {
     ICRProductTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kProductCellIdentifier forIndexPath:indexPath];
     RocketEntity *currentProduct = _productsArray[indexPath.row];
-    
+    cell.imageView.image = nil;
     cell.productNameLabel.text = currentProduct.name;
     cell.brandNameLabel.text = currentProduct.brand;
     cell.productPriceLabel.text = [NSString stringWithFormat:@"%.2f", [currentProduct.price doubleValue]];
@@ -143,24 +179,26 @@ static const int kCellHeightValue = 70.0;
         __weak __typeof(&*self)weakSelf = self;
         __block ICRProductTableViewCell *bgCell = cell;
         __block NSIndexPath *bgCellIndexPath = indexPath;
-        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:currentProduct.image_url]];
-        [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
-            RocketEntity *product = [RocketEntity MR_findFirstByAttribute:@"id" withValue:currentProduct.id inContext:localContext];
-            product.image = imageData;
-        } completion:^(BOOL success, NSError *error) {
-            NSLog(@"saved successfully");
-            dispatch_async(dispatch_get_main_queue(), ^{
-                bgCell.imageView.image = [[UIImage alloc] initWithData:imageData];
-                [weakSelf.tableView reloadRowsAtIndexPaths:@[bgCellIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            });
-        }];
+        __block RocketEntity *blockProduct = currentProduct;
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:blockProduct.image_url]];
+            [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+                blockProduct.image = imageData;
+            } completion:^(BOOL success, NSError *error) {
+                NSLog(@"saved successfully");
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    bgCell.imageView.image = [[UIImage alloc] initWithData:imageData];
+                    [weakSelf.tableView reloadRowsAtIndexPaths:@[bgCellIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+                });
+            }];
 
             
             
+        });
     } else {
         cell.productImageView.image = [UIImage new];;
     }
-    if (indexPath.row >= _productsArray.count - 5)
+    if (indexPath.row >= _productsArray.count - 1)
         [self loadProductsStartingFromRow:(int)indexPath.row];
     return cell;
     

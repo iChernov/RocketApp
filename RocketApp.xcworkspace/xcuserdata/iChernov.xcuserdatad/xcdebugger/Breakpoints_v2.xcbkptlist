@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RocketApp/ICRProductsTableViewController.m"
-            timestampString = "428937114.647568"
+            timestampString = "428939490.888546"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RocketApp/ICRProductsTableViewController.m"
-            timestampString = "428936865.284557"
+            timestampString = "428938918.826198"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "-loadProductsStartingFromRow:"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RocketApp/ICRProductsTableViewController.m"
-            timestampString = "428936865.284557"
+            timestampString = "428939490.888546"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "-loadProductsStartingFromRow:"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,11 +58,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RocketApp/ICRProductsTableViewController.m"
-            timestampString = "428937114.647568"
+            timestampString = "428939490.888546"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
+            landmarkName = "-loadProductsStartingFromRow:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RocketApp/ICRProductsTableViewController.m"
+            timestampString = "428939490.888546"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RocketApp/ICRProductsTableViewController.m"
+            timestampString = "428939182.142113"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
             landmarkName = "-loadProductsStartingFromRow:"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,12 +106,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RocketApp/ICRProductsTableViewController.m"
-            timestampString = "428937123.436172"
+            timestampString = "428939490.888546"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "-loadProductsStartingFromRow:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
