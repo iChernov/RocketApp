@@ -134,6 +134,7 @@ static const int kCellHeightValue = 70.0;
     
     _sortControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Popularity", @"Name", @"Price", @"Brand", nil]];
     [_sortControl setSelectedSegmentIndex:0];
+    [_sortControl addTarget:self action:@selector(setSortingOption:) forControlEvents:UIControlEventValueChanged];
     self.navigationItem.titleView = _sortControl;
     
     
