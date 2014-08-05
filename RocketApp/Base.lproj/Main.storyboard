@@ -50,10 +50,10 @@
             </objects>
             <point key="canvasLocation" x="22" y="138"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Products Table View Controller-->
         <scene sceneID="had-od-arI">
             <objects>
-                <tableViewController id="EN9-UN-YAm" sceneMemberID="viewController">
+                <tableViewController id="EN9-UN-YAm" customClass="ICRProductsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="1li-qg-MBg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -91,8 +91,14 @@
                                 <segment title="Price"/>
                                 <segment title="Brand"/>
                             </segments>
+                            <connections>
+                                <action selector="setSortingOption:" destination="EN9-UN-YAm" eventType="valueChanged" id="hWa-PN-d3u"/>
+                            </connections>
                         </segmentedControl>
                     </navigationItem>
+                    <connections>
+                        <outlet property="sortControl" destination="4Tz-TK-e1T" id="GXA-gh-1yK"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cs4-IK-HwZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

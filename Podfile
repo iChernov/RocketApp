@@ -1,5 +1,5 @@
-platform :ios, '6.0'
+platform :ios, '6.1'
 
-pod 'AFNetworking', '~>1.3.4'
+pod 'AFNetworking'
 pod 'MagicalRecord'
 pod 'Reachability', '~> 3.1.1'
